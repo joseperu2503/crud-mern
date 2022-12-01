@@ -1,19 +1,19 @@
-import BlogModel from "../models/BlogModel.js";
-import boom from "@hapi/boom";
-import { User } from "../models/User.js";
+const { Blog } = require("../db/models/Blog.js");
+const boom = require('@hapi/boom')
+const { User } = require("../db/models/User.js");
 
 // Metodos para el crud
 
-export const getAllBlogs = async (req, res, next) => {
+const getAllBlogs = async (req, res, next) => {
     try {
-        const blogs = await BlogModel.findAll()
+        const blogs = await Blog.findAll()
         res.json(blogs)
     } catch (error) {
         next(error)
     }
 }
 
-export const getUsers = async (req, res, next) => {
+const getUsers = async (req, res, next) => {
     try {
         const users = await User.findAll()
         res.json(users)
@@ -22,9 +22,9 @@ export const getUsers = async (req, res, next) => {
     }
 }
 
-export const getBlog = async (req, res, next) => {
+const getBlog = async (req, res, next) => {
     try {
-        const blog = await BlogModel.findOne({
+        const blog = await Blog.findOne({
             where: {
                 id: req.params.id
             }
@@ -40,18 +40,18 @@ export const getBlog = async (req, res, next) => {
     }
 }
 
-export const createBlog = async (req, res, next) => {
+const createBlog = async (req, res, next) => {
     try {
-        await BlogModel.create(req.body)
+        await Blog.create(req.body)
         res.status(201).json({message: 'Registro creado correctamente'})
     } catch (error) {
         next(error)
     }
 }
 
-export const updateBlog = async (req, res, next) => {
+const updateBlog = async (req, res, next) => {
     try {
-        await BlogModel.update(req.body,{
+        await Blog.update(req.body,{
             where: {
                 id: req.params.id
             }
@@ -62,9 +62,9 @@ export const updateBlog = async (req, res, next) => {
     }
 }
 
-export const deleteBlog = async (req, res, next) => {
+const deleteBlog = async (req, res, next) => {
     try {
-        await BlogModel.destroy({
+        await Blog.destroy({
             where: {
                 id: req.params.id
             }
@@ -75,3 +75,5 @@ export const deleteBlog = async (req, res, next) => {
         next(error)
     }
 }
+
+module.exports = { getAllBlogs, getBlog, getUsers, createBlog, updateBlog, deleteBlog }

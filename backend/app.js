@@ -1,9 +1,16 @@
-import express from "express";
-import cors from "cors";
-import db from "./database/db.js";
-import routerApi from "./routes/index.js";
-import "dotenv/config.js";
-import { logErrors, errorHandler, boomErrorHandler } from "./middlewares/error.handler.js";
+// import express from "express";
+// import cors from "cors";
+// import db from "./database/db.js";
+// import routerApi from "./routes/index.js";
+// import "dotenv/config.js";
+// import { logErrors, errorHandler, boomErrorHandler } from "./middlewares/error.handler.js";
+
+const express = require('express')
+const cors = require('cors')
+const db = require('./config/database.js')
+const routerApi = require("./routes/index.js");
+require('dotenv').config()
+const { logErrors, errorHandler, boomErrorHandler } = require("./middlewares/error.handler.js");
 
 const port = process.env.PORT || 3000;
 
@@ -15,12 +22,12 @@ app.use(logErrors)
 app.use(boomErrorHandler)
 app.use(errorHandler)
 
-try {
-    await db.authenticate()
-    console.log('conexion exitosa a la BD')
-} catch (error) {
-    console.log('error de conexion a la BD: ', error)
-}
+// try {
+//     await db.authenticate()
+//     console.log('conexion exitosa a la BD')
+// } catch (error) {
+//     console.log('error de conexion a la BD: ', error)
+// }
 
 
 app.listen(8000, () => {

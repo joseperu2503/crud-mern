@@ -1,7 +1,7 @@
-import express from "express";
-import { createBlog, deleteBlog, getAllBlogs, getBlog, getUsers, updateBlog } from "../controllers/BlogController.js";
-import { validatorHandler } from "../middlewares/validator.handler.js";
-import { createBlogSchema, updateBlogSchema, getBlogSchema } from "../schemas/blog.schema.js";
+const express = require('express')
+const { createBlog, deleteBlog, getAllBlogs, getBlog, getUsers, updateBlog } = require("../controllers/BlogController.js");
+const { validatorHandler } = require("../middlewares/validator.handler.js");
+const { createBlogSchema, updateBlogSchema, getBlogSchema } = require("../schemas/blog.schema.js");
 
 const router = express.Router()
 
@@ -13,4 +13,4 @@ router.put('/:id',validatorHandler(getBlogSchema, 'params'),validatorHandler(upd
 router.delete('/:id',validatorHandler(getBlogSchema, 'params'), deleteBlog)
 
 
-export default router
+module.exports = router

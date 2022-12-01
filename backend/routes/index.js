@@ -1,6 +1,5 @@
-import blogsRouter from "./blogs.router.js";
-import express from "express";
-
+const blogsRouter = require("./blogs.router.js");
+const express = require('express')
 
 function routerApi(app){
     const router = express.Router()
@@ -8,4 +7,4 @@ function routerApi(app){
     router.use('/blogs', blogsRouter)
 }
 
-export default routerApi
+module.exports = routerApi
