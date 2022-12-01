@@ -18,6 +18,13 @@ export const getBlog = async (req, res) => {
                 id: req.params.id
             }
         })
+
+        if(!blog){
+            res.status(404).json({
+                message: 'not found'
+            })
+        }
+
         res.json(blog)
     } catch (error) {
         res.json({message: error.message})
@@ -27,7 +34,7 @@ export const getBlog = async (req, res) => {
 export const createBlog = async (req, res) => {
     try {
         await BlogModel.create(req.body)
-        res.json({message: 'Registro creado correctamente'})
+        res.status(201).json({message: 'Registro creado correctamente'})
     } catch (error) {
         res.json({message: error.message})
     }
