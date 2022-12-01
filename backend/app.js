@@ -5,7 +5,7 @@ import routerApi from "./routes/index.js";
 import "dotenv/config.js";
 import { logErrors, errorHandler, boomErrorHandler } from "./middlewares/error.handler.js";
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 const app = express()
 app.use(cors())
