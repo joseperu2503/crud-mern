@@ -1,5 +1,6 @@
 import BlogModel from "../models/BlogModel.js";
 import boom from "@hapi/boom";
+import { User } from "../models/User.js";
 
 // Metodos para el crud
 
@@ -7,6 +8,15 @@ export const getAllBlogs = async (req, res, next) => {
     try {
         const blogs = await BlogModel.findAll()
         res.json(blogs)
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getUsers = async (req, res, next) => {
+    try {
+        const users = await User.findAll()
+        res.json(users)
     } catch (error) {
         next(error)
     }
