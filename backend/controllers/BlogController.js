@@ -1,4 +1,5 @@
 import BlogModel from "../models/BlogModel.js";
+import boom from "@hapi/boom";
 
 // Metodos para el crud
 
@@ -7,7 +8,7 @@ export const getAllBlogs = async (req, res) => {
         const blogs = await BlogModel.findAll()
         res.json(blogs)
     } catch (error) {
-        res.json({message: error.message})
+        next(error)
     }
 }
 
@@ -20,9 +21,7 @@ export const getBlog = async (req, res, next) => {
         })
 
         if(!blog){
-            res.status(404).json({
-                message: 'not found'
-            })
+            throw boom.notFound('Blog not found')
         }
 
         res.json(blog)
@@ -36,7 +35,7 @@ export const createBlog = async (req, res) => {
         await BlogModel.create(req.body)
         res.status(201).json({message: 'Registro creado correctamente'})
     } catch (error) {
-        res.json({message: error.message})
+        next(error)
     }
 }
 
@@ -49,7 +48,7 @@ export const updateBlog = async (req, res) => {
         })
         res.json({message: 'Registro actualizado correctamente'})
     } catch (error) {
-        res.json({message: error.message})
+        next(error)
     }
 }
 
@@ -60,8 +59,9 @@ export const deleteBlog = async (req, res) => {
                 id: req.params.id
             }
         })
+        
         res.json({message: 'Registro eliminado correctamente'})
     } catch (error) {
-        res.json({message: error.message})
+        next(error)
     }
 }

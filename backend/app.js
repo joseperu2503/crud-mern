@@ -3,7 +3,7 @@ import cors from "cors";
 import db from "./database/db.js";
 import routerApi from "./routes/index.js";
 import "dotenv/config.js";
-import { logErrors, errorHandler } from "./middlewares/error.handler.js";
+import { logErrors, errorHandler, boomErrorHandler } from "./middlewares/error.handler.js";
 
 const port = process.env.PORT;
 
@@ -12,6 +12,7 @@ app.use(cors())
 app.use(express.json())
 routerApi(app)
 app.use(logErrors)
+app.use(boomErrorHandler)
 app.use(errorHandler)
 
 try {
