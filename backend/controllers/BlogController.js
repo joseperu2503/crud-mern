@@ -11,7 +11,7 @@ export const getAllBlogs = async (req, res) => {
     }
 }
 
-export const getBlog = async (req, res) => {
+export const getBlog = async (req, res, next) => {
     try {
         const blog = await BlogModel.findOne({
             where: {
@@ -27,7 +27,7 @@ export const getBlog = async (req, res) => {
 
         res.json(blog)
     } catch (error) {
-        res.json({message: error.message})
+        next(error)
     }
 }
 
