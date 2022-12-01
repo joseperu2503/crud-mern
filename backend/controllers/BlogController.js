@@ -3,7 +3,7 @@ import boom from "@hapi/boom";
 
 // Metodos para el crud
 
-export const getAllBlogs = async (req, res) => {
+export const getAllBlogs = async (req, res, next) => {
     try {
         const blogs = await BlogModel.findAll()
         res.json(blogs)
@@ -30,7 +30,7 @@ export const getBlog = async (req, res, next) => {
     }
 }
 
-export const createBlog = async (req, res) => {
+export const createBlog = async (req, res, next) => {
     try {
         await BlogModel.create(req.body)
         res.status(201).json({message: 'Registro creado correctamente'})
@@ -39,7 +39,7 @@ export const createBlog = async (req, res) => {
     }
 }
 
-export const updateBlog = async (req, res) => {
+export const updateBlog = async (req, res, next) => {
     try {
         await BlogModel.update(req.body,{
             where: {
@@ -52,7 +52,7 @@ export const updateBlog = async (req, res) => {
     }
 }
 
-export const deleteBlog = async (req, res) => {
+export const deleteBlog = async (req, res, next) => {
     try {
         await BlogModel.destroy({
             where: {
