@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
+// const { Blog } = require("./Blog");
 
 const USER_TABLE = "users";
 
@@ -32,7 +33,7 @@ const UserSchema = {
 
 class User extends Model {
     static associate(){
-
+        // this.hasMany(Blog)
     }
 
     static config(sequelize){

@@ -1,32 +1,29 @@
-const { Blog } = require("../db/models/Blog.js");
 const boom = require('@hapi/boom')
 const { User } = require("../db/models/User.js");
 
-class BlogController {
+class UserController {
     static index = async (req, res, next) => {
         try {
-            const blogs = await Blog.findAll({
-                include: ['user']
-            })
-            res.json(blogs)
+            const users = await User.findAll()
+            res.json(users)
         } catch (error) {
             next(error)
         }
     }
- 
+
     static show = async (req, res, next) => {
         try {
-            const blog = await Blog.findOne({
+            const user = await User.findOne({
                 where: {
                     id: req.params.id
                 }
             })
     
-            if(!blog){
-                throw boom.notFound('Blog not found')
+            if(!user){
+                throw boom.notFound('User not found')
             }
     
-            res.json(blog)
+            res.json(user)
         } catch (error) {
             next(error)
         }
@@ -34,7 +31,7 @@ class BlogController {
     
     static store = async (req, res, next) => {
         try {
-            await Blog.create(req.body)
+            await User.create(req.body)
             res.status(201).json({message: 'Registro creado correctamente'})
         } catch (error) {
             next(error)
@@ -43,7 +40,7 @@ class BlogController {
     
     static update = async (req, res, next) => {
         try {
-            await Blog.update(req.body,{
+            await User.update(req.body,{
                 where: {
                     id: req.params.id
                 }
@@ -56,7 +53,7 @@ class BlogController {
     
     static destroy = async (req, res, next) => {
         try {
-            await Blog.destroy({
+            await User.destroy({
                 where: {
                     id: req.params.id
                 }
@@ -70,4 +67,4 @@ class BlogController {
 }
 
 
-module.exports = BlogController
+module.exports = UserController

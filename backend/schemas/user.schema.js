@@ -1,20 +1,20 @@
 const Joi = require('joi')
 
 const id = Joi.number().integer().min(1)
-const title = Joi.string()
-const content = Joi.string()
 const name = Joi.string()
+const email = Joi.string()
+const pasword = Joi.string()
 
 const createBlogSchema = Joi.object({
-    title: title.required(),
-    content: content.required(),
+    name: name.required(),
+    email: email.required(),
     name: name.required(),
 })
 
 const updateBlogSchema = Joi.object({
-    title: title,
+    name: name,
     content: content,
-    name: name
+    pasword: pasword
 })
 
 const getBlogSchema = Joi.object({

@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
+const { User, USER_TABLE } = require("./User");
 
 const BLOG_TABLE = "blogs";
 
@@ -18,6 +19,16 @@ const BlogSchema = {
         type: DataTypes.STRING,
         unique: true,
     },
+    userId: {
+        field: 'user_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+            model: USER_TABLE,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE'
+    },
     createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
@@ -27,8 +38,8 @@ const BlogSchema = {
 };
 
 class Blog extends Model {
-    static associate(){
-
+    static associate(models){
+        this.belongsTo(models.User, {as: 'user'})
     }
 
     static config(sequelize){
