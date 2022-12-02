@@ -5,7 +5,7 @@ function setupModels(sequelize) {
     User.init(UserSchema, User.config(sequelize))
     Blog.init(BlogSchema, Blog.config(sequelize))
 
-    // User.associate()
+    User.associate(sequelize.models)
     Blog.associate(sequelize.models)
     
     // User.sync({ alter: true })

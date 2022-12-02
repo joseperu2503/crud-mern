@@ -10,6 +10,7 @@ router.get('/:id', validatorHandler(getBlogSchema, 'params') ,UserController.sho
 router.post('/',validatorHandler(createBlogSchema, 'body'), UserController.store)
 router.put('/:id',validatorHandler(getBlogSchema, 'params'),validatorHandler(updateBlogSchema, 'body'), UserController.update)
 router.delete('/:id',validatorHandler(getBlogSchema, 'params'), UserController.destroy)
+router.get('/:id/blogs',validatorHandler(getBlogSchema, 'params'), UserController.blogs)
 
 
 module.exports = router

@@ -14,6 +14,7 @@ class UserController {
     static show = async (req, res, next) => {
         try {
             const user = await User.findOne({
+                include: ['blogs'],
                 where: {
                     id: req.params.id
                 }
@@ -60,6 +61,22 @@ class UserController {
             })
             
             res.json({message: 'Registro eliminado correctamente'})
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static blogs = async (req, res, next) => {
+        try {
+            const user = await User.findOne({
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            const blogs = await  user.getBlogs()
+
+            res.json(blogs)
         } catch (error) {
             next(error)
         }
