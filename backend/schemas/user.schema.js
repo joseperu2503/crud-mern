@@ -3,22 +3,22 @@ const Joi = require('joi')
 const id = Joi.number().integer().min(1)
 const name = Joi.string()
 const email = Joi.string()
-const pasword = Joi.string()
+const password = Joi.string()
 
-const createBlogSchema = Joi.object({
+const createUserSchema = Joi.object({
     name: name.required(),
     email: email.required(),
-    name: name.required(),
+    password: password.required(),
 })
 
-const updateBlogSchema = Joi.object({
+const updateUserSchema = Joi.object({
     name: name,
-    content: content,
-    pasword: pasword
+    email: email,
+    password: password
 })
 
-const getBlogSchema = Joi.object({
+const getUserSchema = Joi.object({
     id: id.required()
 })
 
-module.exports = { createBlogSchema, updateBlogSchema, getBlogSchema}
+module.exports = { createUserSchema, updateUserSchema, getUserSchema}

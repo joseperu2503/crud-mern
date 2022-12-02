@@ -11,6 +11,7 @@ const db = require('./config/database.js')
 const routerApi = require("./routes/index.js");
 require('dotenv').config()
 const { logErrors, errorHandler, boomErrorHandler } = require("./middlewares/error.handler.js");
+const { checkApiKey } = require('./middlewares/auth.handler')
 
 const port = process.env.PORT || 3000;
 
@@ -21,6 +22,10 @@ routerApi(app)
 app.use(logErrors)
 app.use(boomErrorHandler)
 app.use(errorHandler)
+
+app.get('/ruta-prueba',checkApiKey, (req, res) => {
+    res.send('Ruta de prueba')
+})
 
 // try {
 //     await db.authenticate()
