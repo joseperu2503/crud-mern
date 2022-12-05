@@ -18,6 +18,7 @@ const port = process.env.PORT || 3000;
 const app = express()
 app.use(cors())
 app.use(express.json())
+require('./utils/auth/index')
 routerApi(app)
 app.use(logErrors)
 app.use(boomErrorHandler)

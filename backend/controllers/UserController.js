@@ -29,6 +29,14 @@ class UserController {
             next(error)
         }
     }
+
+    static findByEmail = async (email) => {
+        const user = await User.findOne({
+            where: {email}
+        })
+
+        return user
+    }
     
     static store = async (req, res, next) => {
         try {
